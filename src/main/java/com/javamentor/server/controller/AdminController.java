@@ -1,26 +1,32 @@
 package com.javamentor.server.controller;
 
+import com.javamentor.server.model.JsonObject;
 import com.javamentor.server.model.Role;
 import com.javamentor.server.model.User;
 import com.javamentor.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
     private UserService service;
+
+    @GetMapping("/getUserList")
+    public JsonObject getUserList() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.setListUsers(service.getAllUser());
+        return jsonObject;
+    }
+
 
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
