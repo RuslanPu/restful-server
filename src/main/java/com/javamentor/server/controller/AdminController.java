@@ -27,6 +27,25 @@ public class AdminController {
         return jsonObject;
     }
 
+    @GetMapping("/getUser/{id}")
+    public User getUserById(@PathVariable Long id) {
+        User user = service.getUserById(id);
+        return user;
+    }
+
+    @PostMapping("/getAllRole")
+    public JsonObject getAllRole() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.setAllRoles(service.getAllRole());
+        return jsonObject;
+    }
+
+    @PostMapping("/editUser")
+    public String editUser(@RequestBody JsonObject jsonObject){
+        service.edit(jsonObject.getCurrentUserForAdd(), jsonObject.getCurrentSelectedRolesForAdd());
+        return "update";
+    }
+
 
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -71,16 +90,16 @@ public class AdminController {
 //		return modelAndView;
 //	}
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public ModelAndView editUser(@ModelAttribute("user") User user, @RequestParam("checkboxRole") String[] checkboxRoles) {
-        List<Role> listRoles = service.getAllRole();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/admin/users");
-        List<Role> oldRoles = new ArrayList<>();
-        for (int i = 0; i < checkboxRoles.length; i++) {
-            oldRoles.add(new Role(checkboxRoles[i]));
-        }
-        user.setRoles(oldRoles);
+//    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+//    public ModelAndView editUser(@ModelAttribute("user") User user, @RequestParam("checkboxRole") String[] checkboxRoles) {
+//        List<Role> listRoles = service.getAllRole();
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("redirect:/admin/users");
+//        List<Role> oldRoles = new ArrayList<>();
+//        for (int i = 0; i < checkboxRoles.length; i++) {
+//            oldRoles.add(new Role(checkboxRoles[i]));
+//        }
+//        user.setRoles(oldRoles);
 //		if (checkboxRoles.length < 2) {
 //			modelAndView.setViewName("admin/editPage");
 //			modelAndView.addObject("listRoles", listRoles);
@@ -107,9 +126,9 @@ public class AdminController {
 //			return modelAndView;
 //		}
 
-        service.edit(user, checkboxRoles);
-        return modelAndView;
-    }
+//        service.edit(user, checkboxRoles);
+//        return modelAndView;
+//    }
 
 //	@RequestMapping(value="/add", method = RequestMethod.GET)
 //	public ModelAndView addPage() {

@@ -19,7 +19,7 @@ public class UserController {
     private UserService service;
 
     @GetMapping("/getUser/{email}")
-    public User getUserById(@PathVariable("email") String email) {
+    public User getUserByEmail(@PathVariable("email") String email) {
         User user = service.getUserByEmail(email);
         return user;
     }
