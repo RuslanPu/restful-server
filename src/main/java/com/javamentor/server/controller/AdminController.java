@@ -33,7 +33,7 @@ public class AdminController {
         return user;
     }
 
-    @PostMapping("/getAllRole")
+    @GetMapping("/getAllRole")
     public JsonObject getAllRole() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.setAllRoles(service.getAllRole());

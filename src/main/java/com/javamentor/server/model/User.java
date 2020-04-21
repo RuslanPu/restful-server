@@ -30,6 +30,10 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
+    public String getPassword() {
+        return password;
+    }
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_role",
