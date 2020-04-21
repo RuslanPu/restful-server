@@ -6,11 +6,9 @@ import com.javamentor.server.model.User;
 import com.javamentor.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -42,7 +40,7 @@ public class AdminController {
 
     @PostMapping("/editUser")
     public String editUser(@RequestBody JsonObject jsonObject){
-        service.edit(jsonObject.getCurrentUserForAdd(), jsonObject.getCurrentSelectedRolesForAdd());
+        service.edit(jsonObject.getCurrentUserForEdit(), jsonObject.getCurrentSelectedRolesForEdit());
         return "update";
     }
 
