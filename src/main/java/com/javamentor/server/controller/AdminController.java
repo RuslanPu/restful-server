@@ -44,7 +44,12 @@ public class AdminController {
         return "update";
     }
 
-
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUserById(@PathVariable Long id) {
+        User userForDeleted = service.getUserById(id);
+        service.delete(userForDeleted);
+        return "delete";
+    }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ModelAndView mainPage() {
