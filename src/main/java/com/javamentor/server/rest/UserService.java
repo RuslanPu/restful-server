@@ -1,4 +1,4 @@
-package com.javamentor.server.service;
+package com.javamentor.server.rest;
 
 import com.javamentor.server.model.Role;
 import com.javamentor.server.model.User;
